@@ -6,6 +6,7 @@ module uart_transmitter
         input PSEL2,
         input [7:0]PADDR,
         input PWRITE,
+        input PRESET,
         input [7:0] tx_parallel, 
         output reg  PREADY,
         output reg  o_Tx_Serial,
@@ -21,6 +22,10 @@ module uart_transmitter
     reg [7:0]    r_Tx_Data     = 0;
     reg          r_Tx_Done     = 0;
  
+    always @(posedge PCLK) // ASYNC reset
+        begin
+            if(PRESET) next_state = IDLE;
+        end
     always @(posedge PCLK)
         begin
             case(state)
