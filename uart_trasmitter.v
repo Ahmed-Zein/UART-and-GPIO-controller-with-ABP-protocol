@@ -24,7 +24,7 @@ module uart_transmitter
  
     always @(posedge PCLK) // ASYNC reset
         begin
-            if(PRESET) next_state = IDLE;
+            if(PRESET) state = IDLE;
         end
     always @(posedge PCLK)
         begin
@@ -98,8 +98,7 @@ module uart_transmitter
                                 PREADY <= 1'b0;
                             end
                     end
-                default:
-                    state <= IDLE;
+                default: state <= IDLE;
             endcase
         end
     assign o_Tx_Done   = r_Tx_Done;

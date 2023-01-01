@@ -3,10 +3,12 @@ module uart_receiver
     (
         input PCLK,
         input ENABLE,
-        input PSEL,
+        input PSEL2,
         input [7:0]PADDR,
         input PWRITE,
+        input PRESET,
         input rx_serial,
+        output reg  PREADY,
         output rx_done,
         output[7:0] rx_parallel
     );
@@ -23,7 +25,7 @@ module uart_receiver
 
     always @(posedge PCLK) // ASYNC reset
         begin
-            if(PRESET) next_state = IDLE;
+            if(PRESET) state = IDLE;
         end
     always @(posedge PCLK)
         begin
