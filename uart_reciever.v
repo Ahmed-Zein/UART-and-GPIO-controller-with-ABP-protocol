@@ -36,7 +36,7 @@ module uart_receiver
                         done <=0;
                         counter <=0;
                         bit_index <=0;
-                        if(PSEL2 && PADDR[7] == 1'b0 && PWRITE) 
+                        if(PSEL2 && PADDR[7] == 1'b0 && !PWRITE) 
                                 PREADY=1'b1;
                         if(ENABLE && PREADY && rx_data == 1'b0) // start bit has been detected on the serial input
                             state <= START_BIT;
