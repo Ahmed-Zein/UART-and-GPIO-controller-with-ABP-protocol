@@ -7,17 +7,17 @@ module UART(
     input PWRITE,
     input PRESETn,
     input [7:0] PWDATA,
-    output reg [7:0] PRDATA,
+    output reg [7:0] PRDATA, //uart recieve output
     output PREADY,
 
     output reg rx_done,
-    output reg txdone,
+    output reg tx_done,
 
     input rx,
     output tx
 );
 //  CLKS_PER_BIT
-parameter CPB = 0; // change later
+parameter CPB = 87; // change later
 
 // declare rx & tx
 // module uart_receiver
@@ -34,9 +34,9 @@ parameter CPB = 0; // change later
 //         output rx_done,
 //         output[7:0] rx_parallel
 //     );
-uart_receiver rx(
-    .CLKS_PER_BIT(CPB),
+uart_receiver #(CPB) rx(
     PCLK,
+    PENABLE,
     PSEL2,
     PADDR,
     PWRITE,
@@ -62,8 +62,7 @@ uart_receiver rx(
 //         output      o_Tx_Done
 //     );
 
-uart_transmitter tx (
-    .CLKS_PER_BIT(CPB),
+uart_transmitter #(CPB) tx (
     PCLK,
     PENABLE,
     PSEL2,
@@ -73,7 +72,23 @@ uart_transmitter tx (
     PWDATA,
     PREADY,
     tx,
-    done, 
+    tx_done, 
     );
 
 endmodule
+
+
+/*
+# ** Warning: (vsim-3015) C:/Users/ahmed/Desktop/boom/compiling/tb_uart.v(95): [PCDPC] - Port size (8 or 8) does not match connection size (1) for port 'PADDR'. The port definition is at: uart.v(6).
+# 
+#         Region: /tb_uart/uartx
+# ** Error: (vsim-3053) uart.v(48): Illegal output or inout port connection for "port 'rx_done'".
+# 
+#         Region: /tb_uart/uartx/RRx
+# ** Error: (vsim-3053) uart.v(48): Illegal output or inout port connection for "port 'rx_parallel'".
+# 
+#         Region: /tb_uart/uartx/RRx
+# ** Fatal: (vsim-3365) uart.v(76): Too many port connections. Expected 10, found 11.
+#    Time: 0 ps  Iteration: 0  Instance: /tb_uart/uartx/TTx File: C:/Users/ahmed/Desktop/boom/compiling/uart_trasmitter.v
+# FATAL ERROR while loading design
+*/
