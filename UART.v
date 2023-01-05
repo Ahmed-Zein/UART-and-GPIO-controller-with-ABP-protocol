@@ -34,7 +34,7 @@ parameter CPB = 87; // change later
 //         output rx_done,
 //         output[7:0] rx_parallel
 //     );
-uart_receiver #(CPB) rx(
+uart_receiver #(CPB) rrx(
     PCLK,
     PENABLE,
     PSEL2,
@@ -44,7 +44,7 @@ uart_receiver #(CPB) rx(
     rx,
     PREADY,
     rx_done,
-    PRDATA
+    data_output
 );
 
 // module uart_transmitter 
@@ -62,7 +62,7 @@ uart_receiver #(CPB) rx(
 //         output      o_Tx_Done
 //     );
 
-uart_transmitter #(CPB) tx (
+uart_transmitter #(CPB) ttx (
     PCLK,
     PENABLE,
     PSEL2,
@@ -72,7 +72,7 @@ uart_transmitter #(CPB) tx (
     PWDATA,
     PREADY,
     tx,
-    tx_done, 
+    w_tDone
     );
 
 endmodule
