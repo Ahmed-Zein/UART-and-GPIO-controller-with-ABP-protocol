@@ -15,9 +15,9 @@ reg    PCLK;
 reg    PENABLE;
 reg    PSEL2;
 reg [7:0]   PADDR;
-reg [7:0]  PWRITE;
+reg   PWRITE;
 reg   PRESETn;
-reg   PWDATA;
+reg  [7:0] PWDATA;
  
 wire    PREADY;
 wire    o_tx;
@@ -31,11 +31,11 @@ initial
 initial
     begin
         PCLK= 1;
-        PADDR =  8'b11111111;
+        PADDR =  8'b01111111;
         PSEL2        = 1;
         PENABLE     = 1;
         PWRITE      = 1;
-        PWDATA      = 8'b11001100;
+        PWDATA      = 8'b11111111;
         PRESETn = 0;
         // #10000
         // PWRITE      = 0;
