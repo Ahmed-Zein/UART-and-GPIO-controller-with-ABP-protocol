@@ -76,19 +76,3 @@ uart_transmitter #(CPB) ttx (
     );
 
 endmodule
-
-
-/*
-# ** Warning: (vsim-3015) C:/Users/ahmed/Desktop/boom/compiling/tb_uart.v(95): [PCDPC] - Port size (8 or 8) does not match connection size (1) for port 'PADDR'. The port definition is at: uart.v(6).
-# 
-#         Region: /tb_uart/uartx
-# ** Error: (vsim-3053) uart.v(48): Illegal output or inout port connection for "port 'rx_done'".
-# 
-#         Region: /tb_uart/uartx/RRx
-# ** Error: (vsim-3053) uart.v(48): Illegal output or inout port connection for "port 'rx_parallel'".
-# 
-#         Region: /tb_uart/uartx/RRx
-# ** Fatal: (vsim-3365) uart.v(76): Too many port connections. Expected 10, found 11.
-#    Time: 0 ps  Iteration: 0  Instance: /tb_uart/uartx/TTx File: C:/Users/ahmed/Desktop/boom/compiling/uart_trasmitter.v
-# FATAL ERROR while loading design
-*/
