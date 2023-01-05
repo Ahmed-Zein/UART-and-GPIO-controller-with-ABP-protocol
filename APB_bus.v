@@ -22,7 +22,8 @@ module master_bridge (
     output reg PSEL1,PSEL2,
 
     // apb_readData_out data to computer coming from reading slave 
-    output reg [31:0] apb_readData_out
+    output reg [31:0] apb_readData_out,
+    output reg [1:0] currentState
 
 );
 localparam IDLE = 2'b01, SETUP = 2'b10, ACCESS = 2'b11 ;
@@ -52,6 +53,7 @@ end
 
 always @(state ,transfer,PREADY) begin   
             PWRITE <= READ_WRITE; 
+            
             case (state )
                 IDLE: 
                     begin
@@ -114,6 +116,7 @@ always @(posedge PCLK or posedge PRESETn) begin
         state  <= IDLE;
     end
     else begin
+        currentState <= state;
         state  <= nextState;
     end
 end
