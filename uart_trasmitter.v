@@ -4,13 +4,13 @@ module uart_transmitter
         input PCLK,
         input ENABLE,
         input PSEL2,
-        input [7:0]PADDR,
-        input PWRITE,
-        input PRESET,
-        input [7:0] tx_parallel, 
-        output reg  PREADY,
-        output reg  o_Tx_Serial,
-        output      o_Tx_Done
+        input [7:0]PADDR,//address
+        input PWRITE, // write permission
+        input PRESET,//reset
+        input [7:0] tx_parallel, // byte to transmit
+        output reg  PREADY, // slave is ready
+        output reg  o_Tx_Serial, // output
+        output      o_Tx_Done // tranmision is done
     );
 
     // Tx FSM   4 states => 3bits
